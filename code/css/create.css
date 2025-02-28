@@ -1,0 +1,21 @@
+.blog-text{
+  width: 100%;
+  height: 28em;
+}
+
+.blog-title{
+  width: 100%;
+}
+
+.page-title{
+  padding-bottom: 1em;
+}
+
+label{
+  font-size:small ;
+}
+
+textarea{
+  width: 100%;
+}
+
