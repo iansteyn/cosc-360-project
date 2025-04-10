@@ -106,9 +106,13 @@ input[type="file"]::file-selector-button:hover {
 	background-color: var(--background-primary);
 }
 
-input.validation-error {
+input.validation-error, textarea.validation-error {
 	border: 0.15em solid var(--color-error);
 	box-shadow: none;
+}
+
+textarea.validation-error {
+	margin: 0.25em 0;
 }
 
 #edit-user-bio {
