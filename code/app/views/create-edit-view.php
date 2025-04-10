@@ -49,30 +49,34 @@
       method="POST"
       action="<?= $formAction ?>"
       enctype="multipart/form-data"
+      novalidate
     >
-      <label for="post-title">
-        Title
-      </label>
-      <textarea
-        class="blog-title"
-        id="post-title"
-        name="post-title"
-        placeholder="Write your title here!"
-        required
-      ><?= $postTitle ?></textarea>
-      <?php // Note: the above line must stay one line, otherwise weird whitespace is introduced ?>
-
-      <label for="post-body">
-        Body
-      </label>
-      <textarea
-        class="blog-text"
-        id="post-body"
-        name="post-body"
-        placeholder="Write your post here!"
-        required
-      ><?= $postBody ?></textarea>
-      <?php // Note: the above line must stay one line, otherwise weird whitespace is introduced ?>
+      <div class="form-group">
+        <label for="post-title">
+          Title
+        </label>
+        <textarea
+          class="blog-title"
+          id="post-title"
+          name="post-title"
+          placeholder="Write your title here!"
+          required
+        ><?= $postTitle ?></textarea>
+        <?php // Note: the above line must stay one line, otherwise weird whitespace is introduced ?>
+      </div>
+      <div class="form-group">
+        <label for="post-body">
+          Body
+        </label>
+        <textarea
+          class="blog-text"
+          id="post-body"
+          name="post-body"
+          placeholder="Write your post here!"
+          required
+        ><?= $postBody ?></textarea>
+        <?php // Note: the above line must stay one line, otherwise weird whitespace is introduced ?>
+      </div>
 
       <div class="form-group">
         <label for="post-image">
