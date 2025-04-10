@@ -9,7 +9,9 @@ and registration forms on submit
 // EVENT HANDLING FOR FORMS
 const loginForm = document.querySelector("#login-form");
 const registerForm = document.querySelector("#registration-form");
-const forms = [loginForm, registerForm].filter(Boolean);
+const settingsForm = document.querySelector("#user-settings");
+const postForm = document.querySelector("#post-form");
+const forms = [loginForm, registerForm, settingsForm, postForm].filter(Boolean);
 
 forms.forEach((form) => {
     form.addEventListener("submit", (e) => validateForm(e, form));
@@ -65,8 +67,42 @@ function validateForm(event, form) {
         if (profilePicture.files.length == null || profilePicture.files.length == 0) {
             displayError(profilePicture, "Profile picture cannot be empty");
             isValid = false;
-        } else if (profilePicture.files.length > 0 && !validateProfilePicture(profilePicture.files[0])) {
+        } else if (profilePicture.files.length > 0 && !validatePicture(profilePicture.files[0])) {
             displayError(profilePicture, "Profile picture must be a jpg, png, or gif less than 2 MB");
+            isValid = false;
+        }
+    }
+
+    if (form.id === "user-settings") {
+        const newPassword = form.querySelector("#new-password");
+        const confirmPassword = form.querySelector("#confirm-password");
+        const profilePicture = form.querySelector("#profile-picture");
+
+
+        if (!validatePassword(newPassword.value)) {
+            displayError(newPassword, "Password must be at least 8 characters and include " +
+                "an uppercase and lowercase letter, a number, and a special character");
+                isValid = false;
+        }
+
+        if (confirmPassword.value == null || confirmPassword.value == "") {
+            displayError(confirmPassword, "Password cannot be empty");
+            isValid = false;
+        } else if (confirmPassword.value !== password.value) {
+            displayError(confirmPassword, "Passwords must match");
+            isValid = false;
+        }
+
+        if (profilePicture.files.length > 0 && !validatePicture(profilePicture.files[0])) {
+            displayError(profilePicture, "Profile picture must be a jpg, png, or gif less than 2 MB");
+            isValid = false;
+        }
+    }
+
+    if (form.id === "post-form") {
+        const postPicture = form.querySelector("#profile-image");
+        if (postPicture.files.length > 0 && !validatePicture(postPicture.files[0])) {
+            displayError(postPicture, "Profile picture must be a jpg, png, or gif less than 2 MB");
             isValid = false;
         }
     }
@@ -117,7 +153,7 @@ function validatePassword(password) {
 /*
 profile picture uploads are limited to image file types under 2 MB
 */
-function validateProfilePicture(file) {
+function validatePicture(file) {
     const imageTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
     const maxFileSize = 2 * 1024 * 1024;
     return imageTypes.includes(file.type) && file.size <= maxFileSize;
