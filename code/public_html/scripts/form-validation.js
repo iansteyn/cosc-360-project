@@ -88,7 +88,7 @@ function validateForm(event, form) {
         if (confirmPassword.value == null || confirmPassword.value == "") {
             displayError(confirmPassword, "Password cannot be empty");
             isValid = false;
-        } else if (confirmPassword.value !== password.value) {
+        } else if (confirmPassword.value !== newPassword.value) {
             displayError(confirmPassword, "Passwords must match");
             isValid = false;
         }
@@ -100,9 +100,9 @@ function validateForm(event, form) {
     }
 
     if (form.id === "post-form") {
-        const postPicture = form.querySelector("#profile-image");
+        const postPicture = form.querySelector("#post-image");
         if (postPicture.files.length > 0 && !validatePicture(postPicture.files[0])) {
-            displayError(postPicture, "Profile picture must be a jpg, png, or gif less than 2 MB");
+            displayError(postPicture, "Post picture must be a jpg, png, or gif less than 2 MB");
             isValid = false;
         }
     }
