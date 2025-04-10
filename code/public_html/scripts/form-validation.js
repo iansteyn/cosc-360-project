@@ -23,20 +23,23 @@ forms.forEach((form) => {
 function validateForm(event, form) {
     clearErrors(form);
     let isValid = true;
-    const email = form.querySelector("#email");
-    const password = form.querySelector("#password");
 
-    if (email.value == null || email.value == "") {
-        displayError(email, "Email cannot be empty");
-        isValid = false;
-    } else if (!validateEmail(email.value)) {
-        displayError(email, "Please enter a valid email");
-        isValid = false;
-    }
-
-    if (password.value == null || password.value == "") {
-        displayError(password, "Password cannot be empty");
-        isValid = false;
+    if (form.id === "login-form" || form.id === "registration-form") {
+        const email = form.querySelector("#email");
+        const password = form.querySelector("#password");
+    
+        if (email.value == null || email.value == "") {
+            displayError(email, "Email cannot be empty");
+            isValid = false;
+        } else if (!validateEmail(email.value)) {
+            displayError(email, "Please enter a valid email");
+            isValid = false;
+        }
+    
+        if (password.value == null || password.value == "") {
+            displayError(password, "Password cannot be empty");
+            isValid = false;
+        }
     }
 
     if (form.id === "registration-form") {
@@ -100,7 +103,19 @@ function validateForm(event, form) {
     }
 
     if (form.id === "post-form") {
+        const postTitle = form.querySelector("#post-title");
+        const postBody = form.querySelector("#post-body");
         const postPicture = form.querySelector("#post-image");
+
+        if (postTitle.value == null || postTitle.value == "") {
+            displayError(postTitle, "Post title cannot be empty");
+            isValid = false;
+        }
+        if (postBody.value == null || postBody.value == "") {
+            displayError(postBody, "Post body cannot be empty");
+            isValid = false;
+        }
+
         if (postPicture.files.length > 0 && !validatePicture(postPicture.files[0])) {
             displayError(postPicture, "Post picture must be a jpg, png, or gif less than 2 MB");
             isValid = false;
